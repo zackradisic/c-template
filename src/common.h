@@ -60,4 +60,26 @@ void _panic(const char *file, int line, const char *fun, const char *fmt, ...);
 
 #define TODO(fmt, args...) safefail(fmt, ##args)
 
+// clang-format off
+#if defined(__clang__) && __has_feature(nullability)
+  #ifndef nullable
+    #define nullable _Nullable
+  #endif
+  #define ASSUME_NONNULL_BEGIN                                                \
+    _Pragma("clang diagnostic push")                                              \
+    _Pragma("clang diagnostic ignored \"-Wnullability-completeness\"")            \
+    _Pragma("clang diagnostic ignored \"-Wnullability-inferred-on-nested-type\"") \
+    _Pragma("clang assume_nonnull begin")
+  #define ASSUME_NONNULL_END    \
+    _Pragma("clang diagnostic pop") \
+    _Pragma("clang assume_nonnull end")
+#else
+  #ifndef nullable
+    #define nullable
+  #endif
+  #define ASSUME_NONNULL_BEGIN
+  #define ASSUME_NONNULL_END
+#endif
+// clang-format on
+
 #endif // COMMON_H
