@@ -2,6 +2,28 @@
 
 Some common code starter code I use in C projects, curated into a project template.
 
+## Arrays
+
+Heap-allocated and dynamically resizable. Internally is just a `ptr`, `len` and `cap`.
+
+```C
+#include "common.h"
+#include "array.h"
+
+typedef array_type(u32) u32array_t;
+
+int main() {
+    u32array_t arr = array_empty(u32t_arrayt);
+
+    array_push(u32, &arr, 420);
+    u32 val = array_pop(u32, &arr);
+    safecheck(val == 420);
+
+    // Reserve capacity
+    array_reserve(u32, &arr, 64);
+}
+```
+
 ## Common
 
 ### Integer types
