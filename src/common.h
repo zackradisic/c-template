@@ -4,7 +4,6 @@
 #include <_types/_uint16_t.h>
 #include <_types/_uint32_t.h>
 #include <_types/_uint8_t.h>
-#define DEBUG 1
 
 #if DEBUG
 #define SAFECHECK_ENABLED 1
@@ -30,6 +29,7 @@ typedef uint64_t u64;
 typedef size_t usize;
 
 int float_eq(float a, float b);
+#define flte_zero(a) (a) <= FLT_EPSILON ? true : false
 
 #define ZMEM_HAVE_POSIX_MEMALIGN
 #define ZMEM_L1_CACHE_LINE_SIZE 64
@@ -43,6 +43,8 @@ int float_eq(float a, float b);
 /*   /\* First x in the below expression is for the case when x is 0 *\/ */
 /*   return x && (!(x & (x - 1))); */
 /* } */
+
+#define components(X, T) sizeof(X) / sizeof(T)
 
 // From:
 // https://github.com/rsms/compis/blob/3946ed5c1da01addf5b07faa872cc6463df2521d/src/colib.h#L182
