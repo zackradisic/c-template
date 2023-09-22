@@ -34,8 +34,13 @@ There are also array indexing macros that do bounds checking when compiled with 
 
 ```C
 void demonstate_array_macros(u32array_t *arr, u32array_t *arr2) {
+    // Bounds-checked when DEBUG is defined
     u32 val = array_index(u32, arr, 0);
     u32 *val = array_ref(u32, arr, 420);
+
+    // use the `_checked` suffix to always use bounds checking
+    u32 val1 = array_index_checked(u32, arr, 0);
+    u32 *val1 = array_ref_checked(u32, arr, 420);
 }
 ```
 
